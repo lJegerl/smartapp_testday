@@ -23,9 +23,7 @@ test.describe('Tests of main page', () => {
     await page.getByRole('textbox', { name: 'First name*' }).fill('Yegor');
     await page.getByRole('textbox', { name: 'Last name*' }).fill('Khary');
     await page.getByRole('textbox', { name: 'Work email*' }).fill('test@mail.ru');
-    await page
-      .getByRole('textbox', { name: 'How can we help you?*' })
-      .fill('I need help with website');
+    await page.getByRole('textbox', { name: 'How can we help you?*' }).fill('Test message');
 
     expect(page.getByRole('textbox', { name: 'First name*' })).toHaveValue('Yegor');
     expect(page.getByRole('textbox', { name: 'Last name*' })).toHaveValue('Khary');
@@ -37,22 +35,24 @@ test.describe('Tests of main page', () => {
 
   test('required fields cannot be submitted empty', async ({ page }) => {
     const button = page.getByRole('button', { name: 'SEND MESSAGE' });
-
     const firstName = page.getByRole('textbox', { name: 'First name*' });
-
     const lastName = page.getByRole('textbox', { name: 'Last name*' });
-
     const email = page.getByRole('textbox', { name: 'Work email*' });
+    const message = page.getByRole('textbox', {
+      name: 'How can we help you?*',
+    });
 
     await expect(firstName).toHaveAttribute('aria-required', 'true');
     await expect(lastName).toHaveAttribute('aria-required', 'true');
     await expect(email).toHaveAttribute('aria-required', 'true');
+    await expect(message).toHaveAttribute('aria-required', 'true');
 
     await button.click();
 
     await expect(firstName).toHaveAttribute('aria-invalid', 'true');
     await expect(lastName).toHaveAttribute('aria-invalid', 'true');
     await expect(email).toHaveAttribute('aria-invalid', 'true');
+    await expect(message).toHaveAttribute('aria-required', 'true');
   });
 
   test('Invalid email is rejected', async ({ page }) => {
@@ -119,11 +119,8 @@ test.describe('Tests of main page', () => {
       .scrollIntoViewIfNeeded();
 
     await expect(page.getByRole('textbox', { name: 'First name*' })).toBeVisible();
-
     await expect(page.getByRole('textbox', { name: 'Last name*' })).toBeVisible();
-
     await expect(page.getByRole('textbox', { name: 'Work email*' })).toBeVisible();
-
     await expect(
       page.getByRole('textbox', {
         name: 'How can we help you?*',
@@ -131,7 +128,6 @@ test.describe('Tests of main page', () => {
     ).toBeVisible();
 
     await expect(page.getByText('Attach file')).toBeVisible();
-
     await expect(page.getByRole('button', { name: 'SEND MESSAGE' })).toBeVisible();
 
     const hasHorizontalScroll = await page.evaluate(
