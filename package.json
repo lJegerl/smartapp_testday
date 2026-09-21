@@ -1,0 +1,23 @@
+{
+  "name": "smartapp_testday",
+  "version": "1.0.0",
+  "description": "**Позитивный тест:** Пользователь с правом создания документов выбирает тип `Invoice`, заполняет обязательные поля и сохраняет документ. Система создаёт документ типа `Invoice`.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lJegerl/smartapp_testday.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/lJegerl/smartapp_testday/issues"
+  },
+  "homepage": "https://github.com/lJegerl/smartapp_testday#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.2"
+  }
+}
