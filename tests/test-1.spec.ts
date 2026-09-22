@@ -25,11 +25,11 @@ test.describe('Tests of main page', () => {
     await page.getByRole('textbox', { name: 'Work email*' }).fill('test@mail.ru');
     await page.getByRole('textbox', { name: 'How can we help you?*' }).fill('Test message');
 
-    expect(page.getByRole('textbox', { name: 'First name*' })).toHaveValue('Yegor');
-    expect(page.getByRole('textbox', { name: 'Last name*' })).toHaveValue('Khary');
-    expect(page.getByRole('textbox', { name: 'Work email*' })).toHaveValue('test@mail.ru');
-    expect(page.getByRole('textbox', { name: 'How can we help you?*' })).toHaveValue(
-      'I need help with website',
+    await expect(page.getByRole('textbox', { name: 'First name*' })).toHaveValue('Yegor');
+    await expect(page.getByRole('textbox', { name: 'Last name*' })).toHaveValue('Khary');
+    await expect(page.getByRole('textbox', { name: 'Work email*' })).toHaveValue('test@mail.ru');
+    await expect(page.getByRole('textbox', { name: 'How can we help you?*' })).toHaveValue(
+      'Test message',
     );
   });
 
